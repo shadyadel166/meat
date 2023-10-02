@@ -26,7 +26,7 @@
                   <form
 
 
-                  action="{{ route('sample.validate_registration') }}" method="POST">
+                  action="{{ route('register') }}" method="POST">
 
 
                     <p>Please register your info</p>
@@ -80,6 +80,17 @@
 						<span class="text-danger">{{ $errors->first('phone') }}</span>
 					@endif
                       </div>
+                      <div class="form-outline mb-4">
+                        <label for="address" class="form-label" for="form2Example22">address</label>
+                        <input name="address" type="address" id="form2Example22"
+                                                value="{{ old('address') }}"
+
+                        class="form-control"  />
+                        @if($errors->has('address'))
+
+						<span class="text-danger">{{ $errors->first('address') }}</span>
+					@endif
+                      </div>
 
                     <div class="text-center pt-1 mb-5 pb-1">
                       <button class="btn btn-primary btn-block fa-lg gradient-custom-2 mb-3"
@@ -99,10 +110,12 @@
             </div>
             <div class="col-lg-6 d-flex align-items-center gr">
               <div class="text-white px-3 py-4 p-md-5 mx-md-4">
-                <h4 class="mb-4">We are more than just a company</h4>
-                <p class="small mb-0">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-                  tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud
-                  exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+                <h4 class="mb-4">We are more than just a Stor</h4>
+                <p class="small mb-0"> register today to unlock exclusive deals and discounts, convenient meat delivery, and access to the freshest, healthiest meat on the market!
+
+                    At The Dr.meat, we believe that everyone deserves to have access to high-quality, nutritious meat. That's why we source our meat from only the most trusted and reputable farms and suppliers.
+                    Our meat is raised without antibiotics or hormones, and it's free of artificial ingredients and preservatives.
+                    We also offer a variety of grass-fed and organic meat options to choose from.</p>
               </div>
             </div>
           </div>

@@ -1,119 +1,117 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <title>product Laravel 9 CRUD</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css"
-    rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3"
-    . crossorigin="anonymous">
+<x-head></x-head>
+<x-nav></x-nav>
+
+    <style>
+
+
+        @import url("https://fonts.googleapis.com/css?family=Roboto+Mono");
+* {
+  box-sizing: border-box;
+  font-weight: normal;
+}
+
+body {
+
+  text-align: center;
+
+}
+
+h1 {
+  font-size: 2.2em;
+}
+
+.flip {
+  position: relative;
+}
+.flip > .front,
+.flip > .back {
+  display: block;
+  transition-timing-function: cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  transition-duration: 0.5s;
+  transition-property: transform, opacity;
+}
+.flip > .front {
+  transform: rotateY(0deg);
+}
+.flip > .back {
+  position: absolute;
+  opacity: 0;
+  top: 0px;
+  left: 0px;
+  width: 100%;
+  height: 100%;
+  transform: rotateY(-180deg);
+}
+.flip:hover > .front {
+    transform: rotateY(180deg);
+}
+.flip:hover > .back {
+    opacity: 1;
+    transform: rotateY(0deg);
+}
+.flip.flip-vertical > .back {
+    transform: rotateX(-180deg);
+}
+.flip.flip-vertical:hover > .front {
+    transform: rotateX(180deg);
+}
+.flip.flip-vertical:hover > .back {
+    transform: rotateX(0deg);
+}
+
+.flip {
+    position: relative;
+    display: inline-block;
+  margin-right: 2px;
+  margin-bottom: 1em;
+  width: 400px;
+}
+.flip > .front,
+.flip > .back {
+    display: block;
+    color: white;
+    width: inherit;
+    background-size: cover !important;
+    background-position: center !important;
+    height: 220px;
+    padding: 1em 2em;
+    background: #313131;
+    border-radius: 10px;
+}
+.flip > .front p,
+.flip > .back p {
+  font-size: 0.9125rem;
+  line-height: 160%;
+  color: #999;
+}
+
+.text-shadow {
+  text-shadow: 1px 1px rgba(0, 0, 0, 0.04), 2px 2px rgba(0, 0, 0, 0.04), 3px 3px rgba(0, 0, 0, 0.04), 4px 4px rgba(0, 0, 0, 0.04), 0.125rem 0.125rem rgba(0, 0, 0, 0.04), 6px 6px rgba(0, 0, 0, 0.04), 7px 7px rgba(0, 0, 0, 0.04), 8px 8px rgba(0, 0, 0, 0.04), 9px 9px rgba(0, 0, 0, 0.04), 0.3125rem 0.3125rem rgba(0, 0, 0, 0.04), 11px 11px rgba(0, 0, 0, 0.04), 12px 12px rgba(0, 0, 0, 0.04), 13px 13px rgba(0, 0, 0, 0.04), 14px 14px rgba(0, 0, 0, 0.04), 0.625rem 0.625rem rgba(0, 0, 0, 0.04), 16px 16px rgba(0, 0, 0, 0.04), 17px 17px rgba(0, 0, 0, 0.04), 18px 18px rgba(0, 0, 0, 0.04), 19px 19px rgba(0, 0, 0, 0.04), 1.25rem 1.25rem rgba(0, 0, 0, 0.04);
+}
+</style>
+
 </head>
 <body>
-
-<div class="container">
-    @yield('content')
-</div>
 
 </body>
 </html>
 
-<div class="container">
-    <div class="row" style="margin:20px;">
-        <div class="col-12">
-            <div class="card">
-                <div class="card-header">
-                    <h2>Laravel 9 CRUD (Create, Read, Update and Delete)</h2>
-                </div>
-                <div class="card-body">
-                    <a href="{{ url('/product/create') }}" class="btn btn-success btn-sm" title="Add New product">
-                        Add New
-                    </a>
-                    <br/>
-                    <br/>
-                    <div class="table-responsive">
-                        <table class="table">
-                            <thead>
-                                <tr>
-                                    <th>#</th>
-                                    <th>Name</th>
-                                    <th>Address</th>
-                                    <th>Mobile</th>
-                                    <th>Actions</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                            @foreach($product as $item)
-                                <tr>
-                                    <td>{{ $loop->iteration }}</td>
-                                    <td>{{ $item->name }}</td>
-                                    <td>{{ $item->bio }}</td>
-                                    <td>{{ $item->price }}</td>
-                                    <td>{{ $item->image }}</td>
+    <!-- vertical -->
+    <h4 class="mt-5  mb-5">Vertical Flip</h4>
+    @foreach ($meats as $item)
+    <div class="flip flip-vertical">
+        <div class="front" style="background-image: url({{ asset('img/' . $item->image) }})")>
+           <h1 class="text-shadow">{{  $item->name }}</hi>
+        </div>
+        <div class="back">
+           <h2>${{ $item->price }}</h2>
+           <p>{{ $item->bio }}</p>
+           <p class="btn-holder"><a href="{{ route('addmeat.to.cart', $item->id) }}" class="btn btn-outline-danger">Add to cart</a> </p>
 
-                                    <td>
-                                        <a href="{{ url('/product' . $item->id) }}" title="View product"><button class="btn btn-info btn-sm"><i class="fa fa-eye" aria-hidden="true"></i> View</button></a>
-                                        <a href="{{ url('/product' . $item->id . '/edit') }}" title="Edit product"><button class="btn btn-primary btn-sm"><i class="fa fa-pencil-square-o" aria-hidden="true"></i> Edit</button></a>
-
-                                        <form method="POST" action="{{ url('product' . '/' . $item->id) }}" accept-charset="UTF-8" style="display:inline">
-                                            {{ method_field('DELETE') }}
-                                            {{ csrf_field() }}
-                                            <button type="submit" class="btn btn-danger btn-sm" title="Delete product" onclick="return confirm("Confirm delete?") "><i class="fa fa-trash-o" aria-hidden="true"></i> Delete</button>
-                                        </form>
-                                    </td>
-                                </tr>
-                            @endforeach
-                            </tbody>
-                        </table>
-                    </div>
-
-                </div>
-            </div>
         </div>
     </div>
-</div>
-{{--
-<div class="card" style="margin:20px;">
-<div class="card-header">Create New product</div>
-<div class="card-body">
+    @endforeach
 
-  <form action="{{ url('/product') }}" method="post">
-    {!! csrf_field() !!}
-    <label>Name</label><br>
-    <input type="text" name="name" id="name" class="form-control"><br>
-    <label>Address</label><br>
-    <input type="text" name="address" id="address" class="form-control"><br>
-    <label>Mobile</label><br>
-    <input type="text" name="mobile" id="mobile" class="form-control"><br>
-    <input type="submit" value="Save" class="btn btn-success"><br>
-</form>
+    
+    </body>
 
-</div>
-</div>
-<div class="card" style="margin:20px;">
-    <div class="card-header">Edit product</div>
-    <div class="card-body">
-
-        <form action="{{ url('product/'.$product->id) }}" method="post">
-          {!! csrf_field() !!}
-          @method("PATCH")
-          <input type="hidden" name="id" id="id" value="{{$product->id}}" id="id" />
-          <label>Name</label><br>
-          <input type="text" name="name" id="name" value="{{$product->name}}" class="form-control"></br>
-          <label>Address</label><br>
-          <input type="text" name="bio" id="bio" value="{{$product->address}}" class="form-control"></br>
-          <label>Mobile</label><br>
-          <input type="text" name="mobile" id="mobile" value="{{$product->mobile}}" class="form-control"></br>
-          <input type="submit" value="Update" class="btn btn-success"><br>
-      </form>
-
-    </div>
-  </div>
-  <div class="card" style="margin:20px;">
-    <div class="card-header">product Page</div>
-    <div class="card-body">
-          <div class="card-body">
-          <h5 class="card-title">Name : {{ $product->name }}</h5>
-          <p class="card-text">Address : {{ $product->address }}</p>
-          <p class="card-text">Mobile : {{ $product->mobile }}</p>
-    </div>
-
-    </div>
-  </div> --}}
